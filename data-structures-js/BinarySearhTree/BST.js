@@ -15,7 +15,8 @@ class BST {
     this.right = null
     this.description = {
       explain: "A binary Tree is a special type of tree where each node can have at most two children.",
-      tips: "the root of the tree, left sub-tree and right sub-tree. Time => O(log(n)). Smallest on far left largest on far right"
+      tips: "the root of the tree, left sub-tree and right sub-tree. Time => O(log(n)). Smallest on far left largest on far right",
+      traverse: "3 Traversal Methods -> in Order / Pre Order / Post Order"
     }
   }
   insert(value) {
@@ -105,4 +106,59 @@ class BST {
       return this.left.getSmallestValue()
     }
   }
+}
+
+function validateBST(tree) {
+// minimum value and max value
+// value of child has a min value
+// going left the value of the child has to be less than the index node
+// helper function to pass the min and max value to validateBST
+// depth is the length of the longest branch
+// Time = O(N)
+//Space = O(d) d is the depth of the tree
+return validateBSTHelper(tree, -Infinity, Infinity)
+
+}
+
+function validateBSTHelper(tree, minValue, maxValue) {
+  if (tree === null) return true
+  if (tree.value < minValue || tree.value >= maxValue) return false
+  let leftIsValid = validateBSTHelper(tree.left, minValue, tree.value)
+  return leftIsValid && validateBSTHelper(tree.right, tree.value, maxValue)
+}
+
+function inOrderTraverse(tree, array) {
+  if (tree !== null) {
+    inOrderTraverse(tree.left, array)
+    array.push(tree.value)
+    inOrderTraverse(tree.right, array)
+  }
+  return array
+}
+
+function preOrderTraverse(tree, array) {
+  if (tree !== null) {
+    array.push(tree.value)
+    preOrderTraverse(tree.left, array)
+    preOrderTraverse(tree.right, array)
+  }
+  return array
+}
+
+function postOrderTravers(tree, array) {
+  if (tree !== null) {
+    postOrderTravers(tree.left, array)
+    postOrderTravers(tree.right, array)
+    array.push(tree.value)
+  }
+  return tree
+}
+
+function findKthLargestValueInBst(tree, k) {
+  // O(n) time | O(n) space - where n is the number of nodes in the tree
+  // traverse IN ORDER to compile array of sorted values.
+  // return value at the length of the sorted values array minus k
+  const sortedValues = []
+  inOrderTraverse(tree,sortedValues)
+  return sortedValues[sortedValues.length - k]
 }
