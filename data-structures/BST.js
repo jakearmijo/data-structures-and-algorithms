@@ -1,5 +1,6 @@
-// Binary Search Tree
-// each Node has up to 2 children nodes
+// What are Binary trees?
+// A binary Tree is a special type of tree where each node can have at most two children.
+// Binary tree is generally partitioned into three disjoint subsets, i.e. the root of the tree, left sub-tree and right sub-tree.
 // Time => O(log(n))
 // K-ary Tree => nodes have up to k child-nodes. Binary Tree is K-ary Tree where k == 2
 // Perfect Binary Tree => interior nodes have 2 children and whose lead nodes all have the same depth
@@ -12,6 +13,10 @@ class BST {
     this.value = value
     this.left = null
     this.right = null
+    this.description = {
+      explain: "A binary Tree is a special type of tree where each node can have at most two children.",
+      tips: "the root of the tree, left sub-tree and right sub-tree. Time => O(log(n)). Smallest on far left largest on far right"
+    }
   }
   insert(value) {
     // start by comparing the node we have to the value
