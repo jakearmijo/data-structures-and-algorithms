@@ -14,9 +14,10 @@ class BST {
     this.left = null
     this.right = null
     this.description = {
-      explain: "A binary Tree is a special type of tree where each node can have at most two children.",
-      tips: "the root of the tree, left sub-tree and right sub-tree. Time => O(log(n)). Smallest on far left largest on far right",
-      traverse: "3 Traversal Methods -> in Order / Pre Order / Post Order"
+      explain: 'A binary Tree is a special type of tree where each node can have at most two children.',
+      tips: 'the root of the tree, left sub-tree and right sub-tree. Time => O(log(n)). Smallest on far left largest on far right',
+      traverse: '3 Traversal Methods -> in Order / Pre Order / Post Order',
+      bstProperty: 'any node every node to the left is strictly smaller and node to right is strictly greater than OR equal to'
     }
   }
   insert(value) {
@@ -161,4 +162,25 @@ function findKthLargestValueInBst(tree, k) {
   const sortedValues = []
   inOrderTraverse(tree,sortedValues)
   return sortedValues[sortedValues.length - k]
+}
+
+function minHeightBST(array) {
+// if you want to minimize height you need to minimize the length of both sides of bst
+// balanced binary tree
+return constructMinHeaightBST(array, null, 0, array.length - 1)
+}
+
+function constructMinHeaightBST(array, bst, startIdx, endIdx) {
+  // grab middle element and assign ROOT node
+  // check grab middle element of the values to the left of ROOT
+  // check grab middle element of the values to the right of ROOT
+  if (endIdx < startIdx) return null
+  let middleIdx = Math.floor((startIdx + endIdx) / 2)
+  // now that we have the middle value. create BST of it
+  bst = new BST(array[middleIdx])
+  // now assign the left tree values
+  bst.left = constructMinHeaightBST(array, bst, startIdx, middleIdx - 1)
+  // now assign the right tree values
+  bst.right = constructMinHeaightBST(array, bst, middleIdx + 1, endIdx)
+  return bst
 }
