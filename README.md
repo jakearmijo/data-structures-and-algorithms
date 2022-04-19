@@ -87,7 +87,7 @@
 
 [![Common Data Structures and Algorithms][screenshot]](https://jakearmijo.com)
 
-
+I started this to build common data structures and practice algorithims.
 ### Built With
 
 * []()
