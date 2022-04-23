@@ -88,18 +88,21 @@
 [![Common Data Structures and Algorithms][screenshot]](https://jakearmijo.com)
 
 I started this to build common data structures and practice algorithims.
-### Built With
+What is an algorithm? **A process or set of steps to acomplish a certain task**
+Foundation for being a successful problem solving and developing
 
+### How to improve? Plans and Approaches
+
+* [Frequency Counter]()
 * []()
 * []()
-* []()
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
+<!-- Frequency Counter -->
+## Frequency Counter
 
-To get a local copy up and running follow these simple steps.
+This pattern uses object or sets to collect values/frequencies of values. This is an idea of creating a object and tracking values we come accross. We can then give them a value and increase or decrease it as needed.
 
 ### Prerequisites
 
