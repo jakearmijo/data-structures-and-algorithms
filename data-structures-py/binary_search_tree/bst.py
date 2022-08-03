@@ -1,5 +1,3 @@
-from calendar import c
-
 
 class BST:
   def __init__(self, value):

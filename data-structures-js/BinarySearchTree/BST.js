@@ -14,8 +14,10 @@ class BST {
     this.left = null
     this.right = null
     this.description = {
-      explain: "A binary Tree is a special type of tree where each node can have at most two children.",
-      tips: "the root of the tree, left sub-tree and right sub-tree. Time => O(log(n)). Smallest on far left largest on far right"
+      explain: 'A binary Tree is a special type of tree where each node can have at most two children.',
+      tips: 'the root of the tree, left sub-tree and right sub-tree. Time => O(log(n)). Smallest on far left largest on far right',
+      traverse: '3 Traversal Methods -> in Order / Pre Order / Post Order',
+      bstProperty: 'any node every node to the left is strictly smaller and node to right is strictly greater than OR equal to'
     }
   }
   insert(value) {
@@ -105,4 +107,80 @@ class BST {
       return this.left.getSmallestValue()
     }
   }
+}
+
+function validateBST(tree) {
+// minimum value and max value
+// value of child has a min value
+// going left the value of the child has to be less than the index node
+// helper function to pass the min and max value to validateBST
+// depth is the length of the longest branch
+// Time = O(N)
+//Space = O(d) d is the depth of the tree
+return validateBSTHelper(tree, -Infinity, Infinity)
+
+}
+
+function validateBSTHelper(tree, minValue, maxValue) {
+  if (tree === null) return true
+  if (tree.value < minValue || tree.value >= maxValue) return false
+  let leftIsValid = validateBSTHelper(tree.left, minValue, tree.value)
+  return leftIsValid && validateBSTHelper(tree.right, tree.value, maxValue)
+}
+
+function inOrderTraverse(tree, array) {
+  if (tree !== null) {
+    inOrderTraverse(tree.left, array)
+    array.push(tree.value)
+    inOrderTraverse(tree.right, array)
+  }
+  return array
+}
+
+function preOrderTraverse(tree, array) {
+  if (tree !== null) {
+    array.push(tree.value)
+    preOrderTraverse(tree.left, array)
+    preOrderTraverse(tree.right, array)
+  }
+  return array
+}
+
+function postOrderTravers(tree, array) {
+  if (tree !== null) {
+    postOrderTravers(tree.left, array)
+    postOrderTravers(tree.right, array)
+    array.push(tree.value)
+  }
+  return tree
+}
+
+function findKthLargestValueInBst(tree, k) {
+  // O(n) time | O(n) space - where n is the number of nodes in the tree
+  // traverse IN ORDER to compile array of sorted values.
+  // return value at the length of the sorted values array minus k
+  const sortedValues = []
+  inOrderTraverse(tree,sortedValues)
+  return sortedValues[sortedValues.length - k]
+}
+
+function minHeightBST(array) {
+// if you want to minimize height you need to minimize the length of both sides of bst
+// balanced binary tree
+return constructMinHeaightBST(array, null, 0, array.length - 1)
+}
+
+function constructMinHeaightBST(array, bst, startIdx, endIdx) {
+  // grab middle element and assign ROOT node
+  // check grab middle element of the values to the left of ROOT
+  // check grab middle element of the values to the right of ROOT
+  if (endIdx < startIdx) return null
+  let middleIdx = Math.floor((startIdx + endIdx) / 2)
+  // now that we have the middle value. create BST of it
+  bst = new BST(array[middleIdx])
+  // now assign the left tree values
+  bst.left = constructMinHeaightBST(array, bst, startIdx, middleIdx - 1)
+  // now assign the right tree values
+  bst.right = constructMinHeaightBST(array, bst, middleIdx + 1, endIdx)
+  return bst
 }
