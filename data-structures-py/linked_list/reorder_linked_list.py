@@ -20,7 +20,8 @@ class Soltuion:
 
         # temp prev pointer to save link
         second = slow.next
-        prev = slow.next = None
+        prev = None
+        slow.next = prev
 
         while second:
           temp = second.next
