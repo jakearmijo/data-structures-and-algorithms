@@ -33,7 +33,8 @@ class Solution:
           return 0
         visited.add((r,c))
         
-        return (1 + dfs(r + 1,0) +
+        return (1 + 
+          dfs(r + 1,0) +
           dfs(r - 1, 0) +
           dfs(r, c + 1) +
           dfs(r, c - 1))
