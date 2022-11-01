@@ -26,11 +26,33 @@
 # 1 <= m, n <= 105
 # s and t consist of uppercase and lowercase English letters.
 
-class Solution(object):
-    def minWindow(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
-        
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        if t == "": return ""
+
+        countT, window = {},{}
+
+        for c in t:
+            countT[c] = 1 + countT.get(c,0)
+
+        res, resLen = [-1,-1], float("infinity")
+        have, need = 0, len(countT)
+        left = 0
+        for r in range(len(s)):
+            c = s[r]
+            window[c] = 1 + window.get(c,0)
+
+            if c in countT and window[c] == countT[c]:
+                have += 1
+
+            while have == need:
+                if (r - left + 1) < resLen:
+                    res = [left,r]
+                    resLen = (r - left + 1)
+                window[s[left]] -= 1
+                if s[left] in countT and window[s[left]] < countT[s[left]]:
+                    have -= 1
+                left += 1
+        left,r = res
+
+        return s[left:r + 1] if resLen != float("infinity") else ""
