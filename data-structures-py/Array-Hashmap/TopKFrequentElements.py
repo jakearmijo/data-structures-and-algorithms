@@ -14,7 +14,7 @@ class Solution(object):
         for n in nums:
           count[n] = 1 + count.get(n, 0)
         # loop over the hashmap items and at the value in the array 
-        #in example if value 1 occcurs twice. Then inside the array index 2 will have [1]
+        # in example if value 1 occurs twice. Then inside the array index 2 will have [1]
         for n, c in count.items():
           frequency[c].append(i)
         # declare a result array must return last value of frequency
