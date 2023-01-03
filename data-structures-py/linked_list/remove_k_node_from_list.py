@@ -10,11 +10,11 @@ class Soltuion:
       :type n: int
       :rtype: ListNode
       """
-      # init dummy to use
+      # init dummy to use - value 0 and next pointer to head
       dummy = ListNode(0,head)
-      # point left pointer at dummy 
+      # left pointer at dummy 
       left = dummy
-      # point right pointer at the head
+      # right pointer at the head
       right = head
       # we are going to decrement n as we increase right until no n is left
       while n > 0 and right:

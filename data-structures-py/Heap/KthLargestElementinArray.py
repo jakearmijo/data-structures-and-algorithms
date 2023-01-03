@@ -24,15 +24,28 @@ class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         maxHeap = [x for x in nums]     
         heapq.heapify(maxHeap)
-        print('maxHeap -> Start',maxHeap)
         
         for x in range(len(maxHeap) - k):
-            print('maxHeap -> Loop',maxHeap)
-            print('k',k)
             the_pop = heapq.heappop(maxHeap)
-            print('the_pop ->', the_pop)
         return heapq.heappop(maxHeap)
         
-        
-        
-        
+    def findKthLargestQuickSelect(self, nums: List[int], k: int) -> int:
+        k = len(nums) - k
+
+        def quickSelect(l,r):
+            pivot, p = nums[r], l
+
+            for i in range(l,r):
+                if nums[i] <= pivot:
+                    nums[p], nums[i] = nums[i], nums[p]
+                    p += 1
+            nums[p], nums[r] = nums[r], nums[p]
+
+            if p > k:
+                return quickSelect(l,p - 1)
+            elif p < k:
+                return quickSelect(p + 1, r)
+            else:
+                return nums[p]
+
+        return quickSelect(0, len(nums) - 1)
